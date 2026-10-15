@@ -1,0 +1,63 @@
+﻿using InventoryManagement.Application.Data;
+using InventoryManagement.Application.Dtos;
+using InventoryManagement.Application.Filters;
+using InventoryManagement.Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+
+namespace InventoryManagement.Api.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController(ApplicationDataUnit dataUnit) : ControllerBase
+{
+    [HttpGet("")]
+    public async Task<IActionResult> GetProducts(PublicFilterViewModel? filter = null)
+    {
+        filter ??= new PublicFilterViewModel();
+
+        await dataUnit.Products.GetFilteredAsync(filter);
+        return Ok();
+    }
+
+    [HttpGet("{id:Guid}")]
+    public async Task<IActionResult> GetProductById(Guid id)
+    {
+        var product = await dataUnit.Products.GetByIdAsync(id);
+        if (product == null)
+        {
+            return NotFound();
+        }
+        return Ok(product);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateProduct(CreateProductDto productDto)
+    {
+        
+        var product = await dataUnit.Products.CreateAsync(productDto);
+
+        return Ok(product);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> EditProduct(EditProductDto productDto)
+    {
+        
+        var product = await dataUnit.Products.EditProduct(productDto);
+
+        return Ok(product);
+    }
+
+    [HttpDelete("{id:Guid}")]
+    public async Task<IActionResult> DeleteProduct(Guid id)
+    {
+        if (await dataUnit.Products.DeleteProduct(id))
+        {
+            return NotFound();
+        }
+        return Ok();
+    }
+
+
+}
