@@ -1,4 +1,4 @@
-# Inventory Management | Clean Architecture
+# Inventory Management | Clean Architecture v2
 
 **A .NET Backend Engineering Showcase focused on Clean Architecture, secure APIs, software quality, and production-oriented observability.**
 
