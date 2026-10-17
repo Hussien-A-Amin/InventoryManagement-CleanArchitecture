@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Migrations;
 
+    //add-migration Init-Create - Project InventoryManagement.Infarstructure -StartupProject InventoryManagement.Api -Context ApplicationDbContext
 namespace InventoryManagement.Infarstructure.EFCore;
 public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>(options)
 {
-
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

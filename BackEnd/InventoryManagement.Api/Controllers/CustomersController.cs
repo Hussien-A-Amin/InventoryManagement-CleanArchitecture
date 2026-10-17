@@ -14,8 +14,8 @@ public class CustomersController(ApplicationDataUnit dataUnit) : ControllerBase
     {
         filter ??= new PublicFilterViewModel();
 
-        await dataUnit.Customers.GetFilteredAsync(filter);
-        return Ok();
+       var rs= await dataUnit.Customers.GetFilteredAsync(filter);
+        return Ok(rs);
     }
 
     [HttpGet("{id:Guid}")]
@@ -47,10 +47,19 @@ public class CustomersController(ApplicationDataUnit dataUnit) : ControllerBase
         return Ok(Customer);
     }
 
+    [HttpPatch("{id:Guid}/SetCreditLimit")]
+    public async Task<IActionResult> SetCreditLimit(Guid id,[FromQuery]decimal newCreditLimit)
+    {
+        if (!await dataUnit.Customers.SetCreditLimit(id, newCreditLimit))
+        {
+            return NotFound();
+        }
+        return Ok();
+    }
     [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> DeleteCustomer(Guid id)
     {
-        if (await dataUnit.Customers.DeleteCustomer(id))
+        if (!await dataUnit.Customers.DeleteCustomer(id))
         {
             return NotFound();
         }

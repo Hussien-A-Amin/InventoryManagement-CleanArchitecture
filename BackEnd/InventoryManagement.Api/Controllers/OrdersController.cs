@@ -14,8 +14,9 @@ public class OrdersController(ApplicationDataUnit dataUnit) : ControllerBase
     {
         filter ??= new PublicFilterViewModel();
 
-        await dataUnit.Orders.GetFilteredAsync(filter);
-        return Ok();
+        var rs=await dataUnit.Orders.GetFilteredAsync(filter);
+
+        return Ok(rs);
     }
 
     [HttpGet("{id:Guid}")]
@@ -50,7 +51,17 @@ public class OrdersController(ApplicationDataUnit dataUnit) : ControllerBase
     [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> DeleteOrder(Guid id)
     {
-        if (await dataUnit.Orders.DeleteOrder(id))
+        if (!await dataUnit.Orders.DeleteOrder(id))
+        {
+            return NotFound();
+        }
+        return Ok();
+    }
+
+    [HttpDelete("{id:Guid}")]
+    public async Task<IActionResult> DeletePermanently(Guid id)
+    {
+        if (!await dataUnit.Orders.DeletePermanently(id))
         {
             return NotFound();
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace InventoryManagement.Application.Data;
 
-public abstract class ApplicationDataUnit
+public  class ApplicationDataUnit
 {
     #region Core
 

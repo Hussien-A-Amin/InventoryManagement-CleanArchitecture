@@ -13,4 +13,8 @@ public class Repository<T> where T : class
         dataUnit = unitOfWork;
         _dbSet = dataUnit._context.Set<T>();
     }
+    protected  DbSet<TClass> GetDbSet<TClass>() where TClass : class
+    {
+        return dataUnit._context.Set<TClass>();
+    }
 }

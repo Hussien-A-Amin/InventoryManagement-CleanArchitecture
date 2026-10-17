@@ -4,7 +4,11 @@ using System.Text;
 
 namespace InventoryManagement.Application.Dtos;
 
-public class ProductDto 
+public class EntityDto
+{
+    public Guid Id { get; set; }
+}
+public class ProductDto : EntityDto
 {
     public required string Title { get; set; }
     public string? Description { get; set; }

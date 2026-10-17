@@ -63,6 +63,18 @@ public class CustomerRepository(ApplicationDataUnit _dataUnit) : Repository<Cust
     }
 
    
+    public async Task<bool> SetCreditLimit(Guid id,decimal newCreditLimit)
+    {
+
+        var rs=await _dbSet.ById(id)
+            .ExecuteUpdateAsync(setters => setters
+            .SetProperty(p => p.CreditLimit, newCreditLimit)
+        );
+
+        return rs ==1;
+
+
+    }
     public async Task<bool> DeleteCustomer(Guid id)
     {
        

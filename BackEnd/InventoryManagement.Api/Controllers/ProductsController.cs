@@ -11,13 +11,13 @@ namespace InventoryManagement.Api.Controllers;
 [Route("api/[controller]")]
 public class ProductsController(ApplicationDataUnit dataUnit) : ControllerBase
 {
-    [HttpGet("")]
+    [HttpGet]
     public async Task<IActionResult> GetProducts(PublicFilterViewModel? filter = null)
     {
         filter ??= new PublicFilterViewModel();
 
-        await dataUnit.Products.GetFilteredAsync(filter);
-        return Ok();
+        var rs =await dataUnit.Products.GetFilteredAsync(filter);
+        return Ok(rs);
     }
 
     [HttpGet("{id:Guid}")]
@@ -52,7 +52,7 @@ public class ProductsController(ApplicationDataUnit dataUnit) : ControllerBase
     [HttpDelete("{id:Guid}")]
     public async Task<IActionResult> DeleteProduct(Guid id)
     {
-        if (await dataUnit.Products.DeleteProduct(id))
+        if (!await dataUnit.Products.DeleteProduct(id))
         {
             return NotFound();
         }

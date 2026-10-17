@@ -19,6 +19,7 @@ internal static class ProductExtention
        this IQueryable<Product> query)
        => query.AsNoTracking().Select(p => new ProductDto()
        {
+           Id = p.Id,
            Title = p.Title,
            Price = p.Price,
        });

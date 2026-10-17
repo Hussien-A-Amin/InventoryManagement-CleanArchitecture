@@ -9,6 +9,7 @@ public class Product : DeletableEntity
 
     public decimal Price { get; set; }
 
+    public List<OrderItem> OrderItems { get; set; } = [];
 
 
 }

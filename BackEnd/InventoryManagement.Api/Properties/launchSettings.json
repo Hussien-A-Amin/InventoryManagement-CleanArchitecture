@@ -16,7 +16,18 @@
       "launchBrowser": false,
       "applicationUrl": "https://localhost:7034;http://localhost:5283",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "MyCustomSetting": "customSettingFrom-- launchsettings Secrets",
+        "testconn": "valuefromlaunchsettings"
+      }
+    },
+    "https prod": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7034;http://localhost:5283",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }
