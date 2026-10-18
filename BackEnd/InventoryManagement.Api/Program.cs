@@ -1,4 +1,5 @@
 using InventoryManagement.Api;
+using InventoryManagement.Api.ErrorHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.MapControllers();
-//app.UseExceptionHandler();
+app.UseExceptionHandler();
 
 app.Run();
