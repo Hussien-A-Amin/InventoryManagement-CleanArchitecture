@@ -1,6 +1,3 @@
-
-
-
 using InventoryManagement.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +11,8 @@ builder.Services.AddOpenApi();
 
 
 builder
+    .BuildBasic()
     .BuildDbContext()
-
 
     ;
 
@@ -34,5 +31,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.MapControllers();
+//app.UseExceptionHandler();
 
 app.Run();
