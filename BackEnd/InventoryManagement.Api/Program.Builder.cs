@@ -10,7 +10,8 @@ public static class ProgramExtention
     public static WebApplicationBuilder BuildBasic(this WebApplicationBuilder builder)
     {
 
-        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>()
+            .AddProblemDetails();
 
 
 
