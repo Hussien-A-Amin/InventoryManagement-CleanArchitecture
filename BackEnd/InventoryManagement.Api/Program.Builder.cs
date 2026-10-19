@@ -2,6 +2,7 @@
 using InventoryManagement.Application.Data;
 using InventoryManagement.Infarstructure.EFCore;
 using Microsoft.EntityFrameworkCore;
+using EntityFramework.Exceptions.SqlServer;
 
 namespace InventoryManagement.Api;
 
@@ -11,7 +12,7 @@ public static class ProgramExtention
     {
 
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>()
-            .AddProblemDetails();
+                .AddProblemDetails();
 
 
 
@@ -22,10 +23,15 @@ public static class ProgramExtention
     {
 
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"),
-            o => o
-            .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
-            ));
+            options
+            .UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"),
+                o => o
+                .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
+                )
+            .UseExceptionProcessor()
+            
+            
+            );
 
 
 
