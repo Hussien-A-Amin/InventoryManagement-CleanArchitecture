@@ -1,6 +1,8 @@
-﻿using InventoryManagement.Application.Data;
+﻿using InventoryManagement.Api.ErrorHandlers;
+using InventoryManagement.Application.Data;
 using InventoryManagement.Application.Dtos;
 using InventoryManagement.Application.Filters;
+using InventoryManagement.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryManagement.Api.Controllers;
@@ -14,7 +16,8 @@ public class OrdersController(ApplicationDataUnit dataUnit) : ControllerBase
     {
         filter ??= new PublicFilterViewModel();
 
-        var rs=await dataUnit.Orders.GetFilteredAsync(filter);
+        var v=await dataUnit.Orders.GetFilteredAsync(filter);
+        var rs = Result.Success(v);
 
         return Ok(rs);
     }
@@ -22,30 +25,47 @@ public class OrdersController(ApplicationDataUnit dataUnit) : ControllerBase
     [HttpGet("{id:Guid}")]
     public async Task<IActionResult> GetOrderById(Guid id)
     {
-        var Order = await dataUnit.Orders.GetByIdAsync(id);
-        if (Order == null)
+        var order = await dataUnit.Orders.GetByIdAsync(id);
+        if (order == null)
         {
-            return NotFound();
+            var rs = Result.Failure()
+                .AddError(Error.NotFound)
+                ;
+
+            return NotFound(rs);
         }
-        return Ok(Order);
+        return Ok(Result.Success(order));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateOrder(CreateOrderDto OrderDto)
     {
         
-        var Order = await dataUnit.Orders.CreateAsync(OrderDto);
+        var order = await dataUnit.Orders.CreateAsync(OrderDto);
 
-        return Ok(Order);
+        if (order == null)
+        {
+            var rs = Result.Failure()
+                .AddError(Error.NotFound)
+                ;
+
+            return NotFound(rs);
+        }
+        return Ok(Result.Success(order));
     }
 
     [HttpPut]
     public async Task<IActionResult> EditOrder(EditOrderDto OrderDto)
     {
-        
-        var Order = await dataUnit.Orders.EditOrder(OrderDto);
+        var order = await dataUnit.Orders.EditOrder(OrderDto);
+        if (order == null)
+        {
+            var rs = Result.Failure()
+                .AddError(Error.NotFound);
 
-        return Ok(Order);
+            return NotFound(rs);
+        }
+        return Ok(Result.Success(order));
     }
 
     [HttpDelete("{id:Guid}")]
@@ -53,9 +73,13 @@ public class OrdersController(ApplicationDataUnit dataUnit) : ControllerBase
     {
         if (!await dataUnit.Orders.DeleteOrder(id))
         {
-            return NotFound();
+            var rs = Result.Failure()
+                 .AddError(Error.NotFound);
+
+            return NotFound(rs);
         }
-        return Ok();
+
+        return Ok(Result.Success());
     }
 
     [HttpDelete("{id:Guid}")]
@@ -63,9 +87,13 @@ public class OrdersController(ApplicationDataUnit dataUnit) : ControllerBase
     {
         if (!await dataUnit.Orders.DeletePermanently(id))
         {
-            return NotFound();
+            var rs = Result.Failure()
+                            .AddError(Error.NotFound);
+
+            return NotFound(rs);
         }
-        return Ok();
+
+        return Ok(Result.Success());
     }
 
 

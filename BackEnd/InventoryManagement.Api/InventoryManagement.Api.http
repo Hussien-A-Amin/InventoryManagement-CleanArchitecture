@@ -1,11 +1,11 @@
-@BaseApi = http://localhost:5283/api
-# @BaseApi = http://localhost:81/api
+@BaseApi = http://localhost:5283
+# @BaseApi = http://localhost:84
 
 
 
 
-# GET {{BaseApi}}/Config/
-# Accept: application/json
+GET {{BaseApi}}/Config/
+Accept: application/json
 
 
 
@@ -29,7 +29,7 @@ Post {{BaseApi}}/Products
 Accept: application/json
 Content-Type: application/json
 {
-  "Title": "New Product",
+  "Title": "New Progduct",
   "description": "This is a new product.",
   "price": 19.99,
   "quantity": 100
@@ -53,7 +53,7 @@ Content-Type: application/json
 
 
 ###
-Delete {{BaseApi}}/Products/01a1455b-c178-7b90-b0c8-a405066e1b9b
+Delete {{BaseApi}}/Products/01a14f26-2aa9-76a4-9966-c702ef29bae9
 Accept: application/json
 
 
@@ -81,7 +81,7 @@ Post {{BaseApi}}/Customers
 Accept: application/json
 Content-Type: application/json
 {
-  "Name": "NesfdW adCussfgtomer",
+  "Name": "NesfdW adCussfgtomer"
 }
 
 
@@ -103,7 +103,7 @@ Content-Type: application/json
 Patch {{BaseApi}}/Customers/01a1457b-6cde-7575-ab09-21a0044b5378/SetCreditLimit?newCreditLimit=55000
 Accept: application/json
 ###
-Delete {{BaseApi}}/Customers/01a1457b-d0e3-7128-93ed-a789ed85c1c8
+Delete {{BaseApi}}/Customers/01a14575-de4f-75ba-bb4e-13856c2b07c6
 Accept: application/json
 
 
@@ -178,5 +178,5 @@ Content-Type: application/json
 
 
 ###
-Delete {{BaseApi}}/Orders/01a1457b-d0e3-7128-93ed-a789ed85c1c8
+Delete {{BaseApi}}/Orders/32d08050-38fb-4494-865b-08d7f187753d
 Accept: application/json
