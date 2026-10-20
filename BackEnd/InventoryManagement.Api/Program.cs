@@ -1,5 +1,7 @@
 using InventoryManagement.Api;
 using InventoryManagement.Api.ErrorHandlers;
+using InventoryManagement.Infarstructure.EFCore;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +15,16 @@ builder.Services.AddOpenApi();
 
 builder
     .BuildBasic()
+    .BuildExceptionHandler()
     .BuildDbContext()
+    //.BuildIdentity()
+    .BuildJwt()
+    .BuildFluentValidation()
+    .BuildMapster()
 
     ;
 
-
+var h = builder.Services.Where(p => p.ServiceType == typeof(IAuthenticationSchemeProvider)).ToList();
 
 
 var app = builder.Build();
@@ -30,6 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.UseExceptionHandler();

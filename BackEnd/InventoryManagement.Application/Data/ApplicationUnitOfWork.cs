@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace InventoryManagement.Application.Data;
-
 public  class ApplicationDataUnit
 {
     #region Core

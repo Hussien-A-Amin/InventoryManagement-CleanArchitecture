@@ -1,21 +1,33 @@
-@BaseApi = http://localhost:5283
+@BaseApi = http://localhost:5283/api
 # @BaseApi = http://localhost:84
-
+@token  = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxYTE1NzY0LTMxNGQtNzg5Zi05OTA1LWI5ODgwNGU1Y2I1ZSIsImV4cCI6MTc5MjQ2OTM0NiwiaXNzIjoiSW52ZW50b3J5TWFuYWdlbWVudEFwaSIsImF1ZCI6IkludmVudG9yeU1hbmFnZW1lbnRVc2VycyJ9.wMKuvW5BMu_agWfFGJLdABQvbd0FIsWcI7RUtMPBXTg
 
 
 
 GET {{BaseApi}}/Config/
 Accept: application/json
 
+###
 
+GET {{BaseApi}}/test/
+Accept: application/json
 
-
-
+###
+Post {{BaseApi}}/Auth
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "sf@f.v",
+  "password": "gzfhg"
+  
+}
 
 
 ###
 GET {{BaseApi}}/Products
 Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
 
 
@@ -68,6 +80,7 @@ Accept: application/json
 ###
 GET {{BaseApi}}/Customers
 Accept: application/json
+Authorization: Bearer {{Token}}
 
 
 

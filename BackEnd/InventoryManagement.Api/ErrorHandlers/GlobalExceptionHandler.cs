@@ -1,4 +1,5 @@
 ﻿using EntityFramework.Exceptions.Common;
+using InventoryManagement.Application.Dtos;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -115,18 +116,7 @@ public record Error(string Code, string Description)
 
 public static class ResultExtention
 {
-    public static Result AddError(this Result result, Error error)
-    {
-        if (error != null)
-        {
-            if (result.Errors == null)
-                result.Errors = [];
-
-            result.Errors.Add(error);
-
-        }
-        return result;
-    }
+    
     
 }
 public class Result
@@ -171,6 +161,52 @@ public class Result<TValue>(TValue? value, bool isSuccess) : Result(isSuccess)
 
     [JsonPropertyOrder(2)]
     public TValue? Data { get => value; } 
+}
+public static class ResultExtentions
+{
+    public static Result AddError(this Result result, Error error)
+    {
+        if (error != null)
+        {
+            if (result.Errors == null)
+                result.Errors = [];
+
+            result.Errors.Add(error);
+
+        }
+        return result;
+    }
+    public static ObjectResult ToProblem(this Result result, int statusCode)
+    {
+        if (result.IsSuccess)
+            throw new InvalidOperationException("Can not convert success result to a Problem");
+
+        var problem = Results.Problem(statusCode: statusCode);
+        var problemDetials = problem.GetType().GetProperty(nameof(ProblemDetails))!.GetValue(problem) as ProblemDetails;
+
+        problemDetials!.Extensions = new Dictionary<string, object?>
+        {
+            {
+              "errors" , result.Errors
+            }
+        };
+
+        return new ObjectResult(problemDetials);
+    }
+    public static ObjectResult ToResult(this UserState state)
+    {
+
+        switch (state)
+        {
+             default:
+                return Result.Failure()
+                    .AddError(new Error("UserExist", "User already exist"))
+                    .ToProblem(StatusCodes.Status404NotFound);
+        }
+
+
+
+    }
 }
 
 

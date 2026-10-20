@@ -14,6 +14,10 @@ public class CustomersController(ApplicationDataUnit dataUnit) : ControllerBase
     [HttpGet("")]
     public async Task<IActionResult> GetCustomers(PublicFilterViewModel? filter = null)
     {
+
+
+
+
         filter ??= new PublicFilterViewModel();
 
         var v = await dataUnit.Customers.GetFilteredAsync(filter);

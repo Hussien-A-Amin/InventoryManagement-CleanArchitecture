@@ -3,6 +3,7 @@ using InventoryManagement.Application.Data;
 using InventoryManagement.Application.Dtos;
 using InventoryManagement.Application.Filters;
 using InventoryManagement.Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace InventoryManagement.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class ProductsController(ApplicationDataUnit dataUnit) : ControllerBase
 {
     [HttpGet]
