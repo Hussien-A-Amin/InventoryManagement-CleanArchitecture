@@ -17,6 +17,7 @@ public class ProductsController(ApplicationDataUnit dataUnit) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetProducts(PublicFilterViewModel? filter = null)
     {
+        var usr = User;
         filter ??= new PublicFilterViewModel();
 
         var v = await dataUnit.Products.GetFilteredAsync(filter);

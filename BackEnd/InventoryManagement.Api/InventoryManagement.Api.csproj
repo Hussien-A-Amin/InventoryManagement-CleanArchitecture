@@ -21,8 +21,4 @@
     <ProjectReference Include="..\InventoryManagement.Infarstructure\InventoryManagement.Infarstructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Middlewares\" />
-  </ItemGroup>
-
 </Project>

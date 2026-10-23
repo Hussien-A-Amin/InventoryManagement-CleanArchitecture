@@ -1,47 +1,31 @@
-@BaseApi = http://localhost:5283/api
+@BaseApi = https://localhost:7034/api
 # @BaseApi = http://localhost:84
-@token  = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxYTE1NzY0LTMxNGQtNzg5Zi05OTA1LWI5ODgwNGU1Y2I1ZSIsImV4cCI6MTc5MjQ2OTM0NiwiaXNzIjoiSW52ZW50b3J5TWFuYWdlbWVudEFwaSIsImF1ZCI6IkludmVudG9yeU1hbmFnZW1lbnRVc2VycyJ9.wMKuvW5BMu_agWfFGJLdABQvbd0FIsWcI7RUtMPBXTg
+@token  = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNzg3ODA1Zi0zMjVlLTQwYzMtMDllZC0wOGRmMmY1ZjRlODgiLCJleHAiOjE4MjI2NDYyNTcsImlzcyI6IkludmVudG9yeU1hbmFnZW1lbnRBcGkiLCJhdWQiOiJJbnZlbnRvcnlNYW5hZ2VtZW50VXNlcnMifQ.OGli6am0ovoD7gKXNKk-Vsv4GSkwSArKb7TMGcaHmyw
 
 
-
-GET {{BaseApi}}/Config/
-Accept: application/json
-
-###
-
-GET {{BaseApi}}/test/
-Accept: application/json
-
-###
-Post {{BaseApi}}/Auth
-Accept: application/json
-Content-Type: application/json
-{
-  "email": "sf@f.v",
-  "password": "gzfhg"
-  
-}
 
 
 ###
 GET {{BaseApi}}/Products
 Accept: application/json
-Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
 
 ###
-GET {{BaseApi}}/Products/01a14559-d37a-7d31-a30e-cab6eb5a4abe
+GET {{BaseApi}}/Products/01a14e14-c4e2-7875-ba97-36a0c0dcd801
 Accept: application/json
+Authorization: Bearer {{token}}
 
 
 ###
 Post {{BaseApi}}/Products
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{token}}
+
 {
-  "Title": "New Progduct",
+  "Title": "New ,mnbm Progduct",
   "description": "This is a new product.",
   "price": 19.99,
   "quantity": 100

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{StatusTitle}</title>
+    <style>
+        /* Media queries for basic mobile responsiveness */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                padding: 10px !important;
+            }
+
+            .fluid {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+            }
+
+            .mobile-button {
+                display: block !important;
+                width: 100% !important;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; -webkit-font-smoothing: antialiased;">
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f6f9fc; padding: 40px 0;">
+        <tr>
+            <td align="center">
+
+                <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); overflow: hidden;">
+
+                    <tr>
+                        <td align="center" style="background-color: #4f46e5; padding: 40px 20px;">
+                            <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.5px;">
+                                {CompanyTitle}
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 40px 30px; background-color: #ffffff;">
+
+                            <h2 style="margin-top: 0; color: #1f2937; font-size: 20px; font-weight: 600; line-height: 1.4;">
+                                {EmailSubject}
+                            </h2>
+
+                            <div style="color: #4b5563; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                                {EmailBody}
+                            </div>
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 30px; margin-bottom: 20px;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="{ActionUrl}" class="mobile-button" style="background-color: #4f46e5; color: #ffffff; text-decoration: none; padding: 14px 30px; font-weight: 600; font-size: 16px; border-radius: 6px; display: inline-block; transition: background-color 0.2s ease;">
+                                            {ActionButtonText}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #f3f4f6;">
+                            <p style="margin: 0; color: #9ca3af; font-size: 14px; line-height: 1.5;">
+                                You are receiving this email because you registered an account or requested an action on our system.
+                            </p>
+                            <p style="margin: 10px 0 0 0; color: #9ca3af; font-size: 13px;">
+                                &copy; 2026 Esnawy Inc. جميع الحقوق محفوظة.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

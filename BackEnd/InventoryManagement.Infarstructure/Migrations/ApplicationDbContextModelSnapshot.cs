@@ -242,6 +242,32 @@ namespace InventoryManagement.Infarstructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("InventoryManagement.Infarstructure.EFCore.ApplicationSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ApplicationSessions", (string)null);
+                });
+
             modelBuilder.Entity("InventoryManagement.Infarstructure.EFCore.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -267,6 +293,16 @@ namespace InventoryManagement.Infarstructure.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -323,6 +359,8 @@ namespace InventoryManagement.Infarstructure.Migrations
                             ConcurrencyStamp = "6164dd67-48d4-4458-8a04-b3b05cc9d1ed",
                             Email = "hussien.a.amin@gmail.com",
                             EmailConfirmed = true,
+                            FirstName = "Hussien",
+                            LastName = "Ahmed",
                             LockoutEnabled = false,
                             NormalizedEmail = "HUSSIEN.A.AMIN@GMAIL.COM",
                             NormalizedUserName = "CONSOLE",
@@ -479,6 +517,17 @@ namespace InventoryManagement.Infarstructure.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("InventoryManagement.Infarstructure.EFCore.ApplicationSession", b =>
+                {
+                    b.HasOne("InventoryManagement.Infarstructure.EFCore.ApplicationUser", "User")
+                        .WithMany("Sessions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("InventoryManagement.Infarstructure.EFCore.ApplicationUser", b =>
                 {
                     b.HasOne("InventoryManagement.Infarstructure.EFCore.ApplicationRole", null)
@@ -555,6 +604,11 @@ namespace InventoryManagement.Infarstructure.Migrations
             modelBuilder.Entity("InventoryManagement.Infarstructure.EFCore.ApplicationRole", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("InventoryManagement.Infarstructure.EFCore.ApplicationUser", b =>
+                {
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

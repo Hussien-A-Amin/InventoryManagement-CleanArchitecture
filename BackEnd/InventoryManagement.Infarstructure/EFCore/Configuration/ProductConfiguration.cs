@@ -21,3 +21,16 @@ public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
 
     }
 }
+public sealed class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
+{
+    public void Configure(EntityTypeBuilder<ApplicationUser> b)
+    {
+     
+
+        b.Property(x => x.FirstName).HasMaxLength(50).IsRequired();
+        b.Property(x => x.LastName).HasMaxLength(50).IsRequired();
+
+
+
+    }
+}

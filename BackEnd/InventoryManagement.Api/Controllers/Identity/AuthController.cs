@@ -3,6 +3,7 @@ using InventoryManagement.Api.ErrorHandlers;
 using InventoryManagement.Application.Data;
 using InventoryManagement.Application.Dtos;
 using InventoryManagement.Infarstructure.EFCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryManagement.Api.Controllers.Auth;
@@ -10,119 +11,119 @@ namespace InventoryManagement.Api.Controllers.Auth;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(ApplicationDataUnit dataUnit, IAuthProvider authProvider, ApplicationUserManager userManager) : ControllerBase
+public class AuthController(ApplicationDataUnit dataUnit, IAuthProvider _authProvider, ApplicationUserManager userManager) : ControllerBase
 {
-    [HttpPost("Register")]
-    public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest request, CancellationToken cancellationToken)
-    {
-        var userState = await userManager.RegisterAsync(request, cancellationToken);
-
-        return userState.ToResult();
-    }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> Login(AuthRequest request)
+    public async Task<IActionResult> Login(AuthRequest request, CancellationToken cancellationToken)
     {
-        var usr = new ApplicationUser()
+        var userState = await userManager.CheckUser(request, cancellationToken);
+        if (userState != UserState.LoginSucceeded)
         {
-            Id=Guid.CreateVersion7(),
-            UserName = request.Email,
-            Email = request.Password,
-        };
-
-
-        var authRes = authProvider.CreateToken(usr, new List<string>(), new List<string>());
-        var rdd = authProvider.ValidateToken(authRes.Token);
+            return userState.ToResult(userManager.Errors);
+        }
+        var authRes = _authProvider.CreateToken(userManager.CurrentUser!);
+        
         return authRes != null
             ? Ok(Result.Success(authRes))
             : Result.Failure().ToProblem(StatusCodes.Status401Unauthorized);
     }
 
+    [HttpPost("RefreshToken")]
+    public async Task<IActionResult> RefreshToken([FromBody]TokenRequest request, CancellationToken cancellationToken)
+    {
+        var userState = await userManager.RefreshTokenAsync( request.RefreshToken, cancellationToken);
 
-    
-
-
-
-
-
-    //[HttpPost]
-    //[ProducesResponseType(typeof(AuthResponse), StatusCodes.Status200OK)]
-    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
-    //public async Task<IActionResult> Login(AuthRequest request, CancellationToken cancellationToken)
-    //{
-    //    var authRes = await _authService.GetTokenAsync(request.Email, request.Password, cancellationToken);
-
-    //    return authRes.IsSuccess
-    //        ? Ok(authRes.Value)
-    //        : authRes.ToProblem(StatusCodes.Status401Unauthorized);
-    //}
-
-    //[HttpPost("RefreshToken")]
-    //public async Task<IActionResult> RefreshToken(TokenRequest request, CancellationToken cancellationToken)
-    //{
-    //    var authRes = await _authService.GetRefreshTokenAsync(request.token, request.refreshToken, cancellationToken);
-
-    //    return authRes.IsSuccess
-    //       ? Ok(authRes.Value)
-    //       : authRes.ToProblem(StatusCodes.Status400BadRequest);
-    //}
-
-    //[HttpPut("Revoke-Refresh-Token")]
-    //public async Task<IActionResult> RevokeRefreshToken(TokenRequest request, CancellationToken cancellationToken)
-    //{
-    //    var isRevoked = await _authService.RevokeRefreshTokenAsync(request.token, request.refreshToken, cancellationToken);
-
-    //    return isRevoked.IsSuccess
-    //       ? Ok()
-    //       : isRevoked.ToProblem(StatusCodes.Status400BadRequest);
-    //}
+        if (userState != UserState.LoginSucceeded)
+        {
+            return userState.ToResult(userManager.Errors);
+        }
+        var authRes = _authProvider.CreateToken(userManager.CurrentUser!);
+        
+        return authRes != null
+           ? Ok(Result.Success(authRes))
+           : Result.Failure().ToProblem(StatusCodes.Status401Unauthorized);
+    }
 
 
 
-    //[HttpPost("Email-Confirm")]
-    //public async Task<IActionResult> EmailConfirm([FromBody] ConfirmEmailRequest request)
-    //{
-    //    var authRes = await _authService.ConfirmEmailAsync(request);
+    [Authorize]
+    [HttpPost("Logout")]
+    public async Task<IActionResult> Logout(CancellationToken cancellationToken)
+    {
+        var sessionId= User.FindFirst("SessionId")?.Value;
+        Guid sessionGuid= Guid.Empty;
+        if (sessionId == null||!Guid.TryParse(sessionId, out sessionGuid))
+        {
+            return Result.Failure().ToProblem(StatusCodes.Status401Unauthorized);
+        }
 
-    //    return authRes.IsSuccess
-    //        ? Ok()
-    //        : authRes.ToProblem(StatusCodes.Status500InternalServerError);
-    //}
+        
+
+        var result = await userManager.Logout(sessionGuid, cancellationToken);
+        if (!result)
+        {
+            return Result.Failure().ToProblem(StatusCodes.Status401Unauthorized);
+        }
+        return Ok(Result.Success());
+    }
 
 
-    //[HttpPost("Resend-Confirmation-Email")]
-    //public async Task<IActionResult> ResendConfirmationCode([FromBody] ResendConfirmationEmail request)
-    //{
-    //    var authRes = await _authService.ResendConfirmEmailAsync(request);
 
-    //    return authRes.IsSuccess
-    //        ? Ok()
-    //        : Ok(authRes.Error);
-    //}
 
-    //[HttpPost("Forget-Password")]
-    //public async Task<IActionResult> ForgetPassword([FromBody] ForgetPasswordRequest request)
-    //{
-    //    var authRes = await _authService.SendResetPasswordCodeAsync(request.Email);
+    [HttpPost("Register")]
+    public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest request, CancellationToken cancellationToken)
+    {
+        var userState = await userManager.RegisterAsync(request, cancellationToken);
 
-    //    return authRes.IsSuccess
-    //        ? Ok()
-    //        : Ok(authRes.Error);
-    //}
+        return userState.ToResult(userManager.Errors);
+    }
 
-    //[HttpPost("Reset-Password")]
-    //public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
-    //{
-    //    var authRes = await _authService.ResetPasswordAsync(request);
-    //    return authRes.IsSuccess
-    //        ? Ok()
-    //        : Ok(authRes.Error);
-    //}
 
-    //[HttpGet("test")]
-    //public IActionResult Test()
-    //{
-    //    Thread.Sleep(6000);
-    //    return Ok("Test endpoint is working");
-    //}
+
+
+    [HttpGet("ConfirmEmail")]
+    public async Task<IActionResult> ConfirmEmailAsync([FromQuery] ConfirmEmailRequest request, CancellationToken cancellationToken)
+    {
+        var userState = await userManager.ConfirmEmailAsync(request, cancellationToken);
+
+        return userState.ToResult(userManager.Errors);
+    }
+
+    [HttpPost("ResetPassword")]
+    public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest request, CancellationToken cancellationToken)
+    {
+        var userState = await userManager.ResetPasswordAsync(request, cancellationToken);
+
+        return userState.ToResult(userManager.Errors);
+    }
+
+
+    [HttpPost("ForgotPassword")]
+    public async Task<IActionResult> SendResetPasswordCode([FromBody] EmailObjectRequst request, CancellationToken cancellationToken)
+    {
+        var userState = await userManager.SendResetPasswordCodeAsync(request, cancellationToken);
+
+        return userState.ToResult(userManager.Errors);
+    }
+
+
+    [HttpPost("ResendConfirmEmail")]
+    public async Task<IActionResult> ResendConfirmEmail([FromBody] EmailObjectRequst request, CancellationToken cancellationToken)
+    {
+        var userState = await userManager.ResendConfirmEmailAsync(request, cancellationToken);
+
+        return userState.ToResult(userManager.Errors);
+    }
+
+
+
+
+
+
+
+   
+
+
+
 }

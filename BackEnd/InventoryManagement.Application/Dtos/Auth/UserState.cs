@@ -15,4 +15,9 @@ public enum UserState
     EmailConfirmationSent,
     PasswordResetFailed,
     PasswordResetSuccessfully,
+    LoginSucceeded,
+    UserNotAllowed,
+    UserLockedOut,
+    LoginFailed,
+    RefreshTokenRevoked,
 }

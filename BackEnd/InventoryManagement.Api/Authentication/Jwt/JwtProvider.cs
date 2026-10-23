@@ -1,10 +1,14 @@
-﻿using InventoryManagement.Infarstructure.EFCore;
+﻿using InventoryManagement.Infarstructure.Costants;
+using InventoryManagement.Infarstructure.EFCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InventoryManagement.Api.Authentication.Jwt;
 
@@ -12,13 +16,18 @@ public class JwtProvider(JwtOptions jwtOption) : IAuthProvider
 {
     private readonly JwtOptions _jwtOptions = jwtOption;
 
-    public TokenResponse CreateToken(ApplicationUser user,
-        IEnumerable<string> userRoles, IEnumerable<string> userPermissions)
+    public TokenResponse CreateToken(ApplicationUser user)
     {
 
         Claim[] claims = new Claim[] {
-            new Claim(ClaimTypes.NameIdentifier , user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Sub , user.Id.ToString()),
+            new Claim("SessionId", user.CurrentSession!.Id.ToString()),
         };
+        user.Roles.ForEach(role => claims = claims.Append(new Claim(ClaimTypes.Role, role)).ToArray());
+
+        user.Permissions.ToList().ForEach(permission => claims = claims.Append(new Claim(permission.Key, permission.Value ?? string.Empty)).ToArray());
+
+
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
 
@@ -30,11 +39,16 @@ public class JwtProvider(JwtOptions jwtOption) : IAuthProvider
             issuer: _jwtOptions.Issuer,
             audience: _jwtOptions.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(expiredIn),
+            expires: DateTime.Now.AddMinutes(expiredIn),
             signingCredentials: signingCredentials
         );
 
-        return new TokenResponse(new JwtSecurityTokenHandler().WriteToken(jwt), expiredIn * 60);
+        return new TokenResponse()
+        {
+            Token = new JwtSecurityTokenHandler().WriteToken(jwt),
+            RefreshToken=user.CurrentSession.RawToken!,
+            ExpireIn = expiredIn * 60
+        };
     }
 
     public string? ValidateToken(string token)
@@ -63,4 +77,12 @@ public class JwtProvider(JwtOptions jwtOption) : IAuthProvider
         }
 
     }
+   
+
+
+
+
+
+
+
 }

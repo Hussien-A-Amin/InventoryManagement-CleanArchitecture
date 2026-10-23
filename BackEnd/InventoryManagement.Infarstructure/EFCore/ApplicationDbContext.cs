@@ -60,6 +60,8 @@ public partial class ApplicationDbContext(DbContextOptions<ApplicationDbContext>
             {
                 Id = new Guid("019f4ece-81d1-789a-b28a-66ab095e780a"),
                 UserName = "Console",
+                FirstName = "Hussien",
+                LastName = "Ahmed",
                 NormalizedUserName = "CONSOLE",
                 Email = "hussien.a.amin@gmail.com",
                 NormalizedEmail = "HUSSIEN.A.AMIN@GMAIL.COM",

@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
@@ -17,19 +18,17 @@ builder
     .BuildBasic()
     .BuildExceptionHandler()
     .BuildDbContext()
-    //.BuildIdentity()
+    .BuildIdentity()
     .BuildJwt()
     .BuildFluentValidation()
     .BuildMapster()
-
+    .BuildUserManager()
+    .BuildMailing()
     ;
 
-var h = builder.Services.Where(p => p.ServiceType == typeof(IAuthenticationSchemeProvider)).ToList();
-
-
 var app = builder.Build();
+app.UseExceptionHandler();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -37,9 +36,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
-app.UseExceptionHandler();
 
 app.Run();
