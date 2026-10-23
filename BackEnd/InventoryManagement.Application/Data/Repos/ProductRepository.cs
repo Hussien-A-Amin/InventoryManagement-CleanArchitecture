@@ -3,6 +3,7 @@ using InventoryManagement.Application.Dtos;
 using InventoryManagement.Application.Filters;
 using InventoryManagement.Domain;
 using InventoryManagement.Infarstructure.EFCore;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryManagement.Application.Data;
@@ -13,8 +14,7 @@ public class ProductRepository(ApplicationDataUnit _dataUnit) : Repository<Produ
     {
         return await _dbSet
             .AsNoTracking()
-            .ById(id)
-            .SelectDto()
+            .ById(id).ProjectToType<ProductDto>()
             .FirstOrDefaultAsync();
     }
 

@@ -1,0 +1,91 @@
+@BaseApi = https://localhost:7034/api
+# @BaseApi = http://localhost:84
+@token  = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOGQ0ZTFiNi0xZTk1LTRkYTMtYTBmOC0wOGRmMmU5MTg3N2UiLCJTZXNzaW9uSWQiOiIwMWExNjkxZC1jMTg4LTdmNDYtYjM4ZS03YjQxYWYwN2JmODEiLCJleHAiOjE3OTI3NjY3MzIsImlzcyI6IkludmVudG9yeU1hbmFnZW1lbnRBcGkiLCJhdWQiOiJJbnZlbnRvcnlNYW5hZ2VtZW50VXNlcnMifQ.ROi6RdttsA_7r2wQr2mk0PsOdxlf7gz27VcaG5X9x4k
+
+@refreshToken=yIT7w9BCtsAIUe8ZafV21yLL/0NXNCUKy2nDDKL94B9aEr7p4qfcBkUJeJj7ZlRtaKAIdfooxTMce/jEtyYTLQ==
+
+
+@mail=hussien.amin@gmail.com
+# @mail=abosketo@gmail.com
+
+###
+Post {{BaseApi}}/Auth/Login
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "{{mail}}",
+  "password": "789789"
+  
+}
+
+###
+Post {{BaseApi}}/Auth/RefreshToken
+Accept: application/json
+Content-Type: application/json
+{
+  "RefreshToken": "C7D74588FB80E8EDB827277BFC98791B"
+  
+}
+
+
+###
+Post {{BaseApi}}/Auth/Logout
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+
+###
+Post {{BaseApi}}/Auth/Register
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "{{mail}}",
+  "FirstName": "sf@f.v",
+  "LastName": "sf@f.v",
+  "password": "123456sgD"
+  
+}
+
+
+
+###
+Post {{BaseApi}}/Auth/Confirmemail
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "{{mail}}",
+  "code": "Q2ZESjhLeEVYNVU2VVhsTnVMSFBXNy9wK0twT2FDc2Rya2kxbHRmU1FzN1pvbHpzNkxmZ0tDSUkyNmswRW5yaGFBcEZialdkQzhSUWcvNmhlTWw4VW1rN21ZZnYvd2JHRWR3SWZzZVl3UXFoWGF3L1E3SEdZR1Fla1Ard2FTYWFzanA4czN0ZXNUcWYrZ0tDL2lZVnFUcHR0UTRwS2RNYnhPUW9EcVptL3VNT0xSNUZXRkNWMmdXTVJtdWJFQlFMMUk5L1lSYVJqVGJlNHNIRHU3YTJneDRvUFJ4UWR5UDhrdUMxVWVrRldhd1lpdHpYUFp1MVc2eWtsMllyYVZMVVRxTVMwQT09"
+  
+}
+
+###
+Post {{BaseApi}}/Auth/ResetPassword
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "{{mail}}",
+  "newPassword": "789789",
+  "code": "Q2ZESjhLeEVYNVU2VVhsTnVMSFBXNy9wK0txWWJiWFdmNUhqd3ZrdDh0SHp3STZKQjJHL3ZKYWJpYjhncnpEeFZOakc2am1namovcGl3WjN2MzVjbER0L0Q0WXdPbjBwc0xsSHJIMTBNNzFsZDBQNGZZemltQmNSOUEzbnNxczdrRVhIRzR4L2hILzhaV0UzV051M0xMNE01bFpjbzVwTWFza0k5VGM4RzNQYWtUWjVoKythd2xVbHJmOXNRckhKZmV6eEthc2VOVnJOQUVJWndYcExyT2RhTTU2Y3JnMmpucWxweXVzWU1GVGNNd2tk"
+  
+}
+
+###
+Post {{BaseApi}}/Auth/ResendConfirmEmail
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "{{mail}}"
+  
+}
+
+###
+Post {{BaseApi}}/Auth/ForgotPassword
+Accept: application/json
+Content-Type: application/json
+{
+  "email": "{{mail}}"
+  
+}
+
+

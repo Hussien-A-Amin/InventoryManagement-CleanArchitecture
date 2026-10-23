@@ -1,8 +1,12 @@
 using InventoryManagement.Api;
+using InventoryManagement.Api.ErrorHandlers;
+using InventoryManagement.Infarstructure.EFCore;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
@@ -12,16 +16,19 @@ builder.Services.AddOpenApi();
 
 builder
     .BuildBasic()
+    .BuildExceptionHandler()
     .BuildDbContext()
-
+    .BuildIdentity()
+    .BuildJwt()
+    .BuildFluentValidation()
+    .BuildMapster()
+    .BuildUserManager()
+    .BuildMailing()
     ;
 
-
-
-
 var app = builder.Build();
+app.UseExceptionHandler();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -29,8 +36,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
-//app.UseExceptionHandler();
 
 app.Run();

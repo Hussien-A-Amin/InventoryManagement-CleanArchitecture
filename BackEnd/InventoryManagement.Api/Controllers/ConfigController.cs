@@ -2,8 +2,7 @@
 
 namespace InventoryManagement.Api.Controllers;
 
-[ApiController]
-[Route("[controller]")]
+
 public class ConfigController : ControllerBase
 {
     private readonly IConfiguration _configuration;
