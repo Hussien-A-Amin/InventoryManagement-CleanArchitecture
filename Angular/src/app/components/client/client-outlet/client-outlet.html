@@ -1,0 +1,53 @@
+<div class="screen-overlay"></div>
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a class="brand-wrap"><img class="logo" src="https://cdn.kafegy.com/Esnawy/assets/assets/imgs/Logo.png" routerLink="/" alt="Home"></a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"><i
+                    class="text-muted material-icons md-menu_open"></i></button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item">
+    <a class="menu-link " aria-current="page" routerLink="/client/overview" routerLinkActive="active">
+        <i class="icon material-icons md-home"></i>
+
+        <span class="text">Overview</span>
+
+    </a>
+</li>
+
+<li class="menu-item">
+    <a class="menu-link" routerLink="/client/shop" routerLinkActive="active">
+        <i class="icon material-icons md-shopping_bag "></i>
+
+        <span class="text">Shop</span>
+
+    </a>
+</li>
+<li class="menu-item">
+    <a class="menu-link" routerLink="/client/settings" routerLinkActive="active">
+        <i class="icon material-icons md-shopping_bag "></i>
+
+        <span class="text">settings</span>
+
+    </a>
+</li>
+        </ul>
+
+    </nav>
+</aside>
+<main class="main-wrap">
+    <app-header></app-header>
+
+
+    <div class="container">
+
+        <router-outlet></router-outlet>
+    </div>
+
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,113 @@
+<section class="content-main">
+  <div class="d-flex justify-content-between mb-3">
+    <div>
+      <h2 class="content-title card-title">المتجر</h2>
+    </div>
+    <div>
+
+      <a class="btn btn-primary btn-sm rounded" routerLink="/client/shop/add">منتج جديد</a>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <header class="card-header">
+      <div class=" row">
+        <div class="  col-lg-4  form-check">
+<select class=" form-select" [(ngModel)]="selectedCatId" (change)="filter()">
+            <option value="">All</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+          </select>
+        </div>
+        <div class="col-lg-8">
+          
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <div class="row p-3 g-2">
+      @for(g of filterdProducts ;track g.id;let i=$index) {
+
+      <article class="itemlist kafRemovableContainer">
+        <div class="row align-items-center">
+
+          <div class="  col-1  d-flex justify-content-center">
+            <input class="item-check-input form-check-input" type="checkbox" value="@product.Id">
+          </div>
+          <div class="col-lg-4 col-sm-4 col-10 flex-grow-1 col-name">
+            <a class="itemside" asp-action="ProductDetails" asp-route-id="@product.Id">
+              <div class="left">
+                <img class="img-sm img-thumbnail" src="{{g.imgurl}}" alt="img">
+              </div>
+              <div class="info">
+                <h6 class="mb-0">{{g.name}}</h6>
+              </div>
+            </a>
+          </div>
+
+
+
+
+          <div class="col-lg-2 status-container col-sm-2 col-2 col-status">
+
+            <span class="badge rounded-pill alert-danger">dghg</span>
+          </div>
+          <div class="col-lg-2 col-sm-2 col-4 col-price">
+            <span>{{g.categoryId}}</span>
+          </div>
+          <div class="col-lg-2 col-sm-2 col-4 col-price">
+            <span>Brand</span>
+          </div>
+
+
+
+          <div class="col-lg-1 col-sm-1 col-2 col-action text-end justify-content-end">
+            <div class="dropdown">
+              <a class="btn btn-light rounded btn-sm font-sm" data-bs-toggle="dropdown"><i
+                  class="material-icons md-more_horiz"></i></a>
+              <div class="dropdown-menu">
+
+                <a class="dropdown-item" asp-controller="Shop" asp-action="ProductDetails"
+                  asp-route-slug="@product.Slug">عرض علي المتجر</a>
+
+
+
+                <a class="dropdown-item" asp-controller="Shop" asp-action="ProductPreview"
+                  asp-route-id="@product.Id">معاينة علي المتجر</a>
+
+
+
+
+                <a class=" dropdown-item btn-KafExcuteAndReload "
+                  data-url="/Subscription/Shop/ActivateProduct?id=@product.Id">
+                  تنشيط
+                </a>
+
+                <a class=" dropdown-item btn-KafExcuteAndReload "
+                  data-url="/Subscription/Shop/DisableProduct?id=@product.Id">
+                  الغاء التنشيط
+                </a>
+
+                <a class=" dropdown-item btn-KafDelete text-danger"
+                  data-url="/Subscription/Shop/DeleteProduct?id=@product.Id">
+                  حذف
+                </a>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+
+
+
+
+      }
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+
+<section class="content-main">
+    <div class="row">
+        <div class="col-9">
+            <div class="content-header">
+                <h2 class="content-title">Add New Product</h2>
+                <div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                
+                <div class="card-body">
+                    <form>
+                        
+                        <div>
+                            <label class="form-label" for="nm">Product title</label>
+                            <input class="form-control" [(ngModel)]="name" name="name" type="text" id="nm">
+                        </div>
+
+                        <div>
+                            <label class="form-label" for="cat">Category</label>
+                            <select class="form-control" [(ngModel)]="selectedCat" name="categoryId" id="cat">
+                                @for (cat of cats; track $index) {
+
+                                    <option [value]="cat.id" >{{cat.name}}</option>
+                                }
+                                
+                                
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="prc">price</label>
+                            <input class="form-control" [(ngModel)]="price" name="price" type="number" id="prc">
+                        </div>
+                        <div>
+                            <label class="form-label" for="qnt">Quntity</label>
+                            <input class="form-control" [(ngModel)]="quantity" name="quantity" type="number" id="qnt">
+                        </div>
+
+
+                       
+                        <div class="mt-2">
+                            <input class="btn btn-primary" (click)="submit()" type="submit">
+
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+           
+        </div>
+       
+    </div>
+</section>

@@ -1,0 +1,224 @@
+     :root {
+            --primary: #245487;
+            --orange: #ffad24;
+            --background: #fffdf8;
+            --text: #183f68;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .welcome-page {
+            min-height: 100vh;
+            min-height: 100svh;
+            
+           
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        
+
+        .welcome-content {
+            justify-self: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 32px 20px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            align-self: flex-end;
+            gap: 0;
+        }
+
+        /* Brand */
+        .brand {
+            margin-bottom: 18px;
+        }
+
+        .brand-name {
+            font-size: clamp(76px, 12vw, 150px);
+            line-height: 1.15;
+            font-weight: 900;
+            letter-spacing: -7px;
+            color: var(--primary);
+        }
+
+        .brand-name span {
+            color: var(--orange);
+        }
+
+        .brand-tagline {
+            font-size: clamp(14px, 2vw, 21px);
+            color: #71869c;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .welcome-title {
+            font-size: clamp(20px, 3vw, 30px);
+            font-weight: 800;
+            margin-top: 24px;
+        }
+
+        .welcome-description {
+            color: #7c8a99;
+            font-size: 15px;
+            line-height: 1.9;
+            margin-top: 10px;
+            max-width: 460px;
+        }
+
+        /* Four navigation icons */
+        .navigation {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: clamp(16px, 4vw, 55px);
+            margin-top: 42px;
+            width: 100%;
+            max-width: 680px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-6px);
+        }
+
+        .nav-icon {
+            width: clamp(66px, 9vw, 100px);
+            aspect-ratio: 1;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .nav-item:hover .nav-icon {
+            box-shadow: 0 12px 28px rgba(30, 60, 90, 0.12);
+        }
+
+        .nav-icon svg {
+            width: 43%;
+            height: 43%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .stores {
+            background: #ffdfb0;
+            color: #e85b12;
+        }
+
+        .products {
+            background: #d8eaff;
+            color: #0878e8;
+        }
+
+        .offers {
+            background: #d2f1e6;
+            color: #138675;
+        }
+
+        .account {
+            background: #eadfff;
+            color: #7441d9;
+        }
+
+        .page-footer {
+            margin-top: 65px;
+            font-size: 12px;
+            color: #a0a9b2;
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            .welcome-page {
+                padding: 24px 18px;
+            }
+
+            .brand-name {
+                letter-spacing: -4px;
+            }
+
+            .welcome-title {
+                margin-top: 18px;
+            }
+
+            .navigation {
+                gap: 12px;
+                margin-top: 34px;
+            }
+
+            .nav-icon {
+                border-radius: 20px;
+            }
+
+            .nav-item {
+                font-size: 13px;
+                gap: 10px;
+            }
+
+            .page-footer {
+                margin-top: 45px;
+            }
+        }
+
+        @media (max-height: 650px) {
+            .welcome-page {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+
+            .brand-name {
+                font-size: clamp(64px, 10vw, 105px);
+            }
+
+            .welcome-title {
+                margin-top: 12px;
+            }
+
+            .navigation {
+                margin-top: 24px;
+            }
+
+            .page-footer {
+                margin-top: 28px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
