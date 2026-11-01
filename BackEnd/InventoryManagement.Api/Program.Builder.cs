@@ -24,6 +24,7 @@ public static class ProgramExtention
     public static WebApplicationBuilder BuildBasic(this WebApplicationBuilder builder)
     {
         builder.Services.AddHttpContextAccessor();
+        builder.Services.AddHttpClient();
 
         return builder;
     }

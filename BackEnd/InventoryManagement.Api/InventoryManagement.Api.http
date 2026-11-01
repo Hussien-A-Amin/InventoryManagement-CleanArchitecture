@@ -6,6 +6,10 @@
 
 
 ###
+GET https://localhost:7034/health
+Accept: application/json
+
+###
 GET {{BaseApi}}/Products
 Accept: application/json
 Authorization: Bearer {{token}}
