@@ -1,0 +1,14 @@
+
+<div style="padding: 20px; font-family: sans-serif;">
+      <h2>NgRx Counter Demo</h2>
+      
+      <!-- Read state using selectCount selector -->
+      <p>Current Count: <strong>{{ count$ | async }}</strong></p>
+
+      <!-- Dispatch actions -->
+      <button  (click)="increment()">+</button>
+      <button (click)="decrement()">-</button>
+      <button (click)="reset()">Reset</button>
+      <button (click)="setToTen()">Set to 10</button>
+     
+    </div>

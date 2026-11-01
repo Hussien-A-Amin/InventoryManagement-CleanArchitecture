@@ -39,10 +39,10 @@
           <div class="col-lg-4 col-sm-4 col-10 flex-grow-1 col-name">
             <a class="itemside" asp-action="ProductDetails" asp-route-id="@product.Id">
               <div class="left">
-                <img class="img-sm img-thumbnail" src="{{g.imgurl}}" alt="img">
+                <img class="img-sm img-thumbnail"  alt="img">
               </div>
               <div class="info">
-                <h6 class="mb-0">{{g.name}}</h6>
+                <h6 class="mb-0" routerLink="/client/ProductsDetails/{{g.id}}">{{g.title}}</h6>
               </div>
             </a>
           </div>
@@ -55,7 +55,7 @@
             <span class="badge rounded-pill alert-danger">dghg</span>
           </div>
           <div class="col-lg-2 col-sm-2 col-4 col-price">
-            <span>{{g.categoryId}}</span>
+            
           </div>
           <div class="col-lg-2 col-sm-2 col-4 col-price">
             <span>Brand</span>

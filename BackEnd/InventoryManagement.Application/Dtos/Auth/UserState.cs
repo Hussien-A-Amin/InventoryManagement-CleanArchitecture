@@ -20,4 +20,5 @@ public enum UserState
     UserLockedOut,
     LoginFailed,
     RefreshTokenRevoked,
+    OpenedSessionsExceeded,
 }

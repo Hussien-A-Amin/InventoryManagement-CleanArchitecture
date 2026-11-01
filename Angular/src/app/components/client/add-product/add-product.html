@@ -19,26 +19,17 @@
                             <label class="form-label" for="nm">Product title</label>
                             <input class="form-control" [(ngModel)]="name" name="name" type="text" id="nm">
                         </div>
-
                         <div>
-                            <label class="form-label" for="cat">Category</label>
-                            <select class="form-control" [(ngModel)]="selectedCat" name="categoryId" id="cat">
-                                @for (cat of cats; track $index) {
-
-                                    <option [value]="cat.id" >{{cat.name}}</option>
-                                }
-                                
-                                
-                            </select>
+                            <label class="form-label" for="nm">Product description</label>
+                            <input class="form-control" [(ngModel)]="description" name="description" type="text" id="nm">
                         </div>
+
+                      
                         <div>
                             <label class="form-label" for="prc">price</label>
                             <input class="form-control" [(ngModel)]="price" name="price" type="number" id="prc">
                         </div>
-                        <div>
-                            <label class="form-label" for="qnt">Quntity</label>
-                            <input class="form-control" [(ngModel)]="quantity" name="quantity" type="number" id="qnt">
-                        </div>
+                        
 
 
                        

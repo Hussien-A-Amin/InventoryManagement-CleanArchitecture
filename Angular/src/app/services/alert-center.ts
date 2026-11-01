@@ -13,6 +13,15 @@ export interface AlertMessage {
   providedIn: 'root',
 })
 export class AlertCenter {
+  handleError(err: any) {
+
+    this.showAlert("error", err.title, err.details);
+
+
+
+    console.log("----------------------------")
+        console.log(err.title)
+  }
 private alertSubject = new Subject<AlertMessage>();
   public alert$ = this.alertSubject.asObservable();
 
@@ -25,6 +34,9 @@ private alertSubject = new Subject<AlertMessage>();
   // Helper methods for convenience
   error(title: string, message: string) {
     this.showAlert("error", title, message);
+  }
+  conflict() {
+    this.showAlert("error", "Conflict", "Not Handeled Error");
   }
 
   warning(title: string, message: string) {

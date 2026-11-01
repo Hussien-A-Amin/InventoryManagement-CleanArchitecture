@@ -18,7 +18,7 @@ export class ProductsApi {
   Create(prd:INewproduct):Observable<IhttpResponse<Iproduct>>{
 
 
-   return this.http.post<IhttpResponse<Iproduct>>(`${environment.baseUrl}/Products/create`,prd,{
+   return this.http.post<IhttpResponse<Iproduct>>(`${environment.baseUrl}/Products`,prd,{
     headers:new HttpHeaders({
       "Accept":"application/json",
       "Content-Type":"application/json",
@@ -43,6 +43,7 @@ export class ProductsApi {
   
   getById(id:string):Observable<IhttpResponse<Iproduct>>{
    return this.http.get<IhttpResponse<Iproduct>>(`${environment.baseUrl}/products/${id}`)
+
   }
 
   getByCatId(id:string):Observable<IhttpResponse<Iproduct[]>>{

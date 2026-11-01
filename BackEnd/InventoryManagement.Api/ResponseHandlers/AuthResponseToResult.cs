@@ -64,6 +64,11 @@ public static class AuthResponseToResult
                 return Result.Failure()
                     .AddError(new Error("InvalidToken", "Invalid Token"))
                     .ToProblem(StatusCodes.Status400BadRequest);
+           
+            case UserState.OpenedSessionsExceeded:
+                return Result.Failure()
+                    .SetProplem("Login Failed", "Opened Sessions Exceeded")
+                    .ToProblem(StatusCodes.Status400BadRequest);
 
 
 
@@ -71,7 +76,7 @@ public static class AuthResponseToResult
 
             case UserState.LoginFailed:
                 return Result.Failure()
-                    .AddError(new Error("LoginFailed", "Login Failed"))
+                    .AddError(new Error("Login Failed", "Login Failed"))
                     .MapErrors(errors)
                     .ToProblem(StatusCodes.Status400BadRequest);
             case UserState.EmailNotConfirmed:

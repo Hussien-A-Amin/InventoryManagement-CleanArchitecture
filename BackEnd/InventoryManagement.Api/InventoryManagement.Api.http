@@ -1,5 +1,5 @@
 @BaseApi = https://localhost:7034/api
-# @BaseApi = http://localhost:84
+# @BaseApi = http://localhost:84/api
 @token  = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNzg3ODA1Zi0zMjVlLTQwYzMtMDllZC0wOGRmMmY1ZjRlODgiLCJleHAiOjE4MjI2NDYyNTcsImlzcyI6IkludmVudG9yeU1hbmFnZW1lbnRBcGkiLCJhdWQiOiJJbnZlbnRvcnlNYW5hZ2VtZW50VXNlcnMifQ.OGli6am0ovoD7gKXNKk-Vsv4GSkwSArKb7TMGcaHmyw
 
 
@@ -25,7 +25,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "Title": "New ,mnbm Progduct",
+  "Title": "New ,mnbmgfjfdgj Progduct",
   "description": "This is a new product.",
   "price": 19.99,
   "quantity": 100

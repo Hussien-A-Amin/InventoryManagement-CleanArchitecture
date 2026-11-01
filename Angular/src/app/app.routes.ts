@@ -14,6 +14,8 @@ import { PublicOutlet } from './components/public/public-outlet/public-outlet';
 import { ProductDetails } from './components/client/product-details/product-details';
 import { PortalOutlet } from './components/portal/portal-outlet/portal-outlet';
 import { AdminOutlet } from './components/admin/admin-outlet/admin-outlet';
+import { EditProduct } from './components/client/edit-product/edit-product';
+import { Register } from './components/register/register';
 
 export const routes: Routes = [
     { path: '', component: Home },
@@ -38,6 +40,7 @@ export const routes: Routes = [
             { path: 'shop', component: Shop },
             { path: 'settings', component: Settings },
             { path: 'ProductsDetails/:id', component: ProductDetails },
+            { path: 'EditProduct/:id', component: EditProduct },
             { path: 'shop/add', component: AddProduct }
         ]
     },
@@ -71,6 +74,7 @@ export const routes: Routes = [
 
 
     { path: 'login', component: Login },
+    { path: 'register', component: Register },
     { path: '**', component: NotFound },
 
 

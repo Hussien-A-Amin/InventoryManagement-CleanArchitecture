@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { IAuthResponse } from '../models/iproduct';
 
 @Injectable({
   providedIn: 'root',
@@ -13,19 +14,29 @@ constructor(){
 }
 
   isLogged(): boolean {
-let item= localStorage.getItem("token")
+let item= localStorage.getItem("islogged")
 
-return item!=null;
+return item==="true";
 }
 
 
-login(){
-  localStorage.setItem("token","fgdsfgasfgSADFGHAFDHSDH")
+login(data: IAuthResponse){
+
+
+
+
+
+  
+  localStorage.setItem("token",data.token)
+  localStorage.setItem("refreshToken",data.refreshToken)
+  localStorage.setItem("islogged",'true')
   this.loginSubject.next(true);
 }
 
 logOUT(){
   localStorage.removeItem("token")
+  localStorage.removeItem("refreshToken")
+  localStorage.removeItem("islogged")
   this.loginSubject.next(false);
 
 }

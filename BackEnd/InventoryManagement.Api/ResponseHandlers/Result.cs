@@ -3,10 +3,14 @@ using InventoryManagement.Application.Dtos;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Text.Json.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InventoryManagement.Api.ResponseHandlers;
+
+public record ProblemRecord(string Title, string Detail);
+
 
 public class Result
 {
@@ -16,6 +20,11 @@ public class Result
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyOrder(4)]
     public List<Error> Errors { get; set; } = default!;
+
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyOrder(4)]
+    public ProblemRecord Problem { get; set; } = default!;
 
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

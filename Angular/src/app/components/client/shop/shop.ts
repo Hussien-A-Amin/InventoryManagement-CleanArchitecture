@@ -18,7 +18,7 @@ export class Shop implements OnChanges, OnInit {
 
 
   categories!: ICategory[];
-  selectedCatId: string="" ;
+  selectedCatId: string = "";
 
 
 
@@ -36,7 +36,7 @@ export class Shop implements OnChanges, OnInit {
 
 
 
-  constructor(private alertCenter:AlertCenter,private productsApi: ProductsApi, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private alertCenter: AlertCenter, private productsApi: ProductsApi, private router: Router, private cdr: ChangeDetectorRef) {
 
 
     this.onTotalChanged = new EventEmitter<number>();
@@ -45,19 +45,19 @@ export class Shop implements OnChanges, OnInit {
   }
   ngOnInit(): void {
 
-    this.productsApi.getAllCategories().subscribe({
-      next: (response) => {
-        
-        
-        this.categories = response.data;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
+    // this.productsApi.getAllCategories().subscribe({
+    //   next: (response) => {
+
+
+    //     this.categories = response.data;
+    //     this.cdr.detectChanges();
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //   }
+    // });
     this.filter();
-     
+
 
   }
   ngOnChanges() {
@@ -66,7 +66,6 @@ export class Shop implements OnChanges, OnInit {
 
   buy(qunt: string, prd: Iproduct) {
     this.total += +qunt * prd.price;
-    prd.quantity -= +qunt;
 
     this.onTotalChanged.emit(this.total);
 
@@ -84,13 +83,17 @@ export class Shop implements OnChanges, OnInit {
     if (this.selectedCatId == "") {
       this.productsApi.getAll().subscribe({
         next: (response) => {
+          if (response.isSuccess) {
+            this.filterdProducts = response.data;
+            this.cdr.detectChanges();
+          }
+          else {
 
+          }
 
-          this.filterdProducts = response.data;
-          this.cdr.detectChanges();
         },
         error: (error) => {
-                    this.alertCenter.error('Error' ," wrong State");
+          this.alertCenter.error('Error', " wrong State");
 
         }
       })
@@ -105,12 +108,12 @@ export class Shop implements OnChanges, OnInit {
           this.cdr.detectChanges();
         },
         error: (error) => {
-          this.alertCenter.error('Error' ," wrong State");
+          this.alertCenter.error('Error', " wrong State");
         }
       })
 
     }
-    
+
   }
   test() {
 

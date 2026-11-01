@@ -33,7 +33,7 @@ export class SwalWrapper {
   ngOnInit() {
     this.subscription = this.alertCenter.alert$.subscribe((data: AlertMessage) => {
       this.triggerSwal(data);
-      console.log(data.message);
+      // console.log(data.message);
     });
   }
 

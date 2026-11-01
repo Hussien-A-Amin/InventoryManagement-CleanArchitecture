@@ -1,15 +1,32 @@
 export interface Iproduct {
 id:string,
-name:string,
-categoryId:string
-imgurl:string,
-quantity:number,
+title:string,
+description:string
+isActive:boolean,
 price:number
 
 }
 export interface INewproduct {
-name:string,
-categoryId:string
+title:string,
+description:string
 price:number
-quantity:number
+}
+export interface IEditproduct {
+id:string,
+title:string,
+description:string
+price:number
+}
+export interface IAuthResponse {
+refreshToken: string
+token: string
+}
+export interface IProblemDetails {
+    type?: string;
+    title?: string;
+    status?: number;
+    detail?: string;
+    instance?: string;
+    errors?: Record<string, string[]>;
+    [key: string]: any;
 }

@@ -13,38 +13,36 @@ import { AlertCenter } from '../../../services/alert-center';
 })
 export class AddProduct implements OnInit {
 
-  selectedCat: string = "";
   name: string = "";
+  description: string = "";
   price: number = 0;
   quantity: number = 0;
   newPrd?: INewproduct;
-  cats: ICategory[] = [];
   constructor(private alertCenter: AlertCenter, private cdr: ChangeDetectorRef, private api: ProductsApi) {
 
   }
   ngOnInit(): void {
-    this.api.getAllCategories().subscribe({
-      next: (response) => {
-        this.cats = response.data;
-        this.selectedCat = this.cats[0]?.id;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
+    // this.api.getAllCategories().subscribe({
+    //   next: (response) => {
+    //     this.cats = response.data;
+    //     this.selectedCat = this.cats[0]?.id;
+    //     this.cdr.detectChanges();
+    //   },
+    //   error: (error) => {
 
-        this.alertCenter.error("", "");
+    //     this.alertCenter.error("", "");
 
-      },
-    })
+    //   },
+    // })
   }
 
 
   submit() {
 
-    let newPrd = {
-      name: this.name,
+    let newPrd :INewproduct= {
+      title: this.name,
+      description: this.description,
       price: this.price,
-      quantity: this.quantity,
-      categoryId: this.selectedCat,
     }
 
 
@@ -52,8 +50,9 @@ export class AddProduct implements OnInit {
       next: (response) => {
         this.alertCenter.success("Saved", "Done")
         this.name = "";
+        this.description = "";
         this.quantity = 0;
-        this.selectedCat = this.cats[0]?.id;
+        // this.selectedCat = this.cats[0]?.id;
 
         this.price = 0;
         this.cdr.detectChanges();

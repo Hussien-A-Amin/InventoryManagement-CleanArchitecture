@@ -1,0 +1,30 @@
+.main-wrap-right {
+    margin-right: 300px;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.aside-mini .main-wrap-right {
+    margin-right: 80px;
+}
+
+@media (max-width: 1200px) {
+
+    /* tablet devices */
+    .main-wrap-right {
+        margin-right: 220px;
+    }
+
+    
+    
+}
+@media (max-width: 768px) {
+
+    
+     .rtl .navbar-aside {
+        transform: translateX(100%) !important;
+
+
+    }
+    
+}

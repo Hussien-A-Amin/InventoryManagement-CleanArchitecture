@@ -29,7 +29,7 @@ public class ProductRepository(ApplicationDataUnit _dataUnit) : Repository<Produ
 
         return await query
             .AsNoTracking()
-            .SelectDto()
+            .ProjectToType<ProductDto>()
             .ToPaginateList(filter.Page, filter.PageSize);
 
     }

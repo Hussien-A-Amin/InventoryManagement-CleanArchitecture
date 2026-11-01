@@ -1,10 +1,15 @@
-<div class="screen-overlay"></div>
+<div [class]="outLetClasses">
 
-<aside class="navbar-aside" id="offcanvas_aside">
+
+
+
+<div class="screen-overlay {{offcanvasClass}}" (mousedown)="hideSidebar()"></div>
+
+<aside class="navbar-aside {{asideClass}}"  id="offcanvas_aside">
     <div class="aside-top">
         <a class="brand-wrap"><img class="logo" src="https://cdn.kafegy.com/Esnawy/assets/assets/imgs/Logo.png" routerLink="/" alt="Home"></a>
         <div>
-            <button class="btn btn-icon btn-aside-minimize"><i
+            <button class="btn btn-icon btn-aside-minimize" (click)="changeSideStatus()"><i
                     class="text-muted material-icons md-menu_open"></i></button>
         </div>
     </div>
@@ -39,15 +44,15 @@
 
     </nav>
 </aside>
-<main class="main-wrap">
-    <app-header></app-header>
+<main [class]="mainClass">
+    <app-header  (offCanvasClicked)="showSideBar()"></app-header>
 
 
     <div class="container">
 
         <router-outlet></router-outlet>
+        <app-footer></app-footer>
     </div>
 
 </main>
-
-<app-footer></app-footer>
+</div>

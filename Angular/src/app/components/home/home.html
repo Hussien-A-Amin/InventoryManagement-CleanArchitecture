@@ -1,73 +1,913 @@
 
- <main class="welcome-page">
-	<div>
-	shfbzfdjhgdgjxgfdj
-</div>
-        <section class="welcome-content">
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container">
 
-            <header class="brand">
-                <div class="brand-name">
-                    اسناوي<span>.</span>
+        <a class="navbar-brand font-weight-bold" routerLink="/">
+            <i class="fas fa-boxes text-primary mr-2"></i>
+            Inventory Management
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#overview">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#capabilities">Capabilities</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#architecture">Architecture</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#technology">Technology</a>
+                </li>
+            </ul>
+
+            <a class="btn btn-outline-secondary mr-2"
+               href="https://github.com/Hussien-A-Amin/InventoryManagement-CleanArchitecture"
+               target="_blank"
+               rel="noopener noreferrer">
+                <i class="fab fa-github mr-1"></i>
+                Source Code
+            </a>
+
+            <a class="btn btn-primary" routerLink="/login">
+                <i class="fas fa-sign-in-alt mr-1"></i>
+                Sign In
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- ================= HERO ================= -->
+<section class="bg-light border-bottom" id="overview">
+    <div class="container py-5">
+        <div class="row align-items-center py-lg-4">
+
+            <div class="col-lg-7 mb-4 mb-lg-0">
+
+                <span class="badge badge-primary mb-3">
+                    ASP.NET Core Web API
+                </span>
+
+                <h1 class="display-4 font-weight-bold">
+                    Inventory Management
+                    <span class="text-primary">API</span>
+                </h1>
+
+                <h4 class="text-secondary mb-3">
+                    Clean Architecture. Secure APIs. Reliable Engineering.
+                </h4>
+
+                <p class="lead text-muted">
+                    A .NET backend engineering portfolio project demonstrating
+                    maintainable architecture, secure authentication,
+                    consistent API responses, robust error handling,
+                    and reliable data access.
+                </p>
+
+                <p class="text-muted">
+                    Built around customers, products, and orders, the project
+                    emphasizes backend engineering practices rather than
+                    unnecessary business complexity.
+                </p>
+
+                <div class="mt-4">
+                    <a routerLink="/client/overview"
+                       class="btn btn-primary btn-lg mr-2 mb-2">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Access Application
+                    </a>
+
+                    <a href="https://github.com/Hussien-A-Amin/InventoryManagement-CleanArchitecture"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn btn-outline-secondary btn-lg mb-2">
+                        <i class="fab fa-github mr-2"></i>
+                        Explore Repository
+                    </a>
                 </div>
 
-                <p class="brand-tagline">
-                    كل ما تحتاجه .. في مكان واحد
-                </p>
-            </header>
+                <div class="mt-4">
+                    <span class="badge badge-soft-success border mr-2 mb-2 p-2">
+                        <i class="fas fa-layer-group text-primary mr-1"></i>
+                        Clean Architecture
+                    </span>
 
-            <h1 class="welcome-title">
-                أهلاً بك في اسناوي
-            </h1>
+                    <span class="badge badge-soft-primary border mr-2 mb-2 p-2">
+                        <i class="fas fa-shield-alt text-success mr-1"></i>
+                        JWT Security
+                    </span>
 
-            <p class="welcome-description">
-                اكتشف المتاجر والمنتجات والعروض المميزة
-                في وجهتك المحلية للتسوق.
+                    <span class="badge badge-soft-danger border mr-2 mb-2 p-2">
+                        <i class="fas fa-database text-info mr-1"></i>
+                        Entity Framework Core
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Project Summary -->
+            <div class="col-lg-5">
+
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0 text-primary">
+                            <i class="fas fa-server text-primary mr-2"></i>
+                            Backend Engineering Overview
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="media mb-4">
+                            <i class="fas fa-sitemap fa-2x text-primary mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="font-weight-bold mb-1">
+                                    Clean Architecture
+                                </h6>
+                                <p class="text-muted mb-0">
+                                    Separation of domain, application,
+                                    infrastructure, and API responsibilities.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="media mb-4">
+                            <i class="fas fa-lock fa-2x text-success mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="font-weight-bold mb-1">
+                                    Authentication & Authorization
+                                </h6>
+                                <p class="text-muted mb-0">
+                                    ASP.NET Core Identity, JWT bearer
+                                    authentication, and access control.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="media mb-4">
+                            <i class="fas fa-exclamation-triangle fa-2x text-warning mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="font-weight-bold mb-1">
+                                    Consistent Error Handling
+                                </h6>
+                                <p class="text-muted mb-0">
+                                    Structured API responses, validation,
+                                    and predictable error contracts.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="media">
+                            <i class="fas fa-chart-line fa-2x text-info mr-3"></i>
+                            <div class="media-body">
+                                <h6 class="font-weight-bold mb-1">
+                                    Quality & Observability
+                                </h6>
+                                <p class="text-muted mb-0">
+                                    Engineering practices for testing,
+                                    diagnostics, and maintainability.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer bg-white">
+                        <span class="text-muted small">
+                            <i class="fas fa-code mr-1"></i>
+                            Developed by Hussein Ahmed Amin
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= PROJECT CAPABILITIES ================= -->
+<section class="py-5" id="capabilities">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="badge badge-primary mb-2">
+                Core Capabilities
+            </span>
+
+            <h2 class="font-weight-bold">
+                Designed Around Backend Engineering
+            </h2>
+
+            <p class="text-muted">
+                A focused implementation of common business operations
+                and the engineering principles behind reliable APIs.
             </p>
+        </div>
 
-            <nav class="navigation" aria-label="القائمة الرئيسية">
+        <div class="row">
 
-                <a routerLink="/client" class="nav-item">
-                    <span class="nav-icon stores">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 10h18l-2-6H5l-2 6Z"/>
-                            <path d="M5 10v10h14V10"/>
-                            <path d="M9 20v-6h6v6"/>
-                            <path d="M3 10a3 3 0 0 0 6 0"/>
-                            <path d="M9 10a3 3 0 0 0 6 0"/>
-                            <path d="M15 10a3 3 0 0 0 6 0"/>
-                        </svg>
-                    </span>
-                    <span>العميل</span>
+            <!-- Customers -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-2x text-primary mb-3"></i>
+
+                        <h5 class="card-title">Customer Management</h5>
+
+                        <p class="card-text text-muted">
+                            Organize customer records, retrieve customer
+                            information, and support customer-related
+                            application workflows.
+                        </p>
+
+                        <span class="badge badge-light border">
+                            Customer API
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-box-open fa-2x text-success mb-3"></i>
+
+                        <h5 class="card-title">Product Management</h5>
+
+                        <p class="card-text text-muted">
+                            Manage product information and demonstrate
+                            structured data access, request validation,
+                            and resource handling.
+                        </p>
+
+                        <span class="badge badge-light border">
+                            Product API
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-shopping-cart fa-2x text-info mb-3"></i>
+
+                        <h5 class="card-title">Order Management</h5>
+
+                        <p class="card-text text-muted">
+                            Connect customers and products through order
+                            workflows while handling invalid requests
+                            and missing resources.
+                        </p>
+
+                        <span class="badge badge-light border">
+                            Order API
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authentication -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-user-shield fa-2x text-danger mb-3"></i>
+
+                        <h5 class="card-title">Identity & JWT</h5>
+
+                        <p class="card-text text-muted">
+                            Explore identity management, token-based
+                            authentication, protected endpoints,
+                            and authorization policies.
+                        </p>
+
+                        <span class="badge badge-light border">
+                            Application Security
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unified Responses -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-exchange-alt fa-2x text-warning mb-3"></i>
+
+                        <h5 class="card-title">Unified API Responses</h5>
+
+                        <p class="card-text text-muted">
+                            Maintain predictable response contracts
+                            and consistent handling of successful
+                            operations and application failures.
+                        </p>
+
+                        <span class="badge badge-light border">
+                            API Design
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Access -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-database fa-2x text-secondary mb-3"></i>
+
+                        <h5 class="card-title">Data Access</h5>
+
+                        <p class="card-text text-muted">
+                            Use Entity Framework Core and separated
+                            persistence responsibilities to support
+                            maintainable data operations.
+                        </p>
+
+                        <span class="badge badge-light border">
+                            EF Core
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= ARCHITECTURE ================= -->
+<section class="py-5 bg-light border-top border-bottom" id="architecture">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="badge badge-primary mb-2">
+                Software Architecture
+            </span>
+
+            <h2 class="font-weight-bold">
+                Clean Architecture
+            </h2>
+
+            <p class="text-muted">
+                Separate responsibilities to improve maintainability,
+                testability, and independence from infrastructure details.
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <!-- API -->
+                <div class="card mb-3 border-primary">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <i class="fas fa-globe fa-2x text-primary"></i>
+                            </div>
+
+                            <div class="col-md-10">
+                                <h5 class="font-weight-bold mb-1">
+                                    API Layer
+                                </h5>
+                                <p class="text-muted mb-0">
+                                    Controllers, HTTP endpoints,
+                                    authentication configuration,
+                                    middleware, and dependency injection.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted mb-3">
+                    <i class="fas fa-arrow-down fa-lg"></i>
+                </div>
+
+                <!-- Application -->
+                <div class="card mb-3 border-success">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <i class="fas fa-cogs fa-2x text-success"></i>
+                            </div>
+
+                            <div class="col-md-10">
+                                <h5 class="font-weight-bold mb-1">
+                                    Application Layer
+                                </h5>
+                                <p class="text-muted mb-0">
+                                    Application use cases, service contracts,
+                                    DTOs, validation, and orchestration.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted mb-3">
+                    <i class="fas fa-arrow-down fa-lg"></i>
+                </div>
+
+                <!-- Domain -->
+                <div class="card mb-3 border-warning">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <i class="fas fa-cubes fa-2x text-warning"></i>
+                            </div>
+
+                            <div class="col-md-10">
+                                <h5 class="font-weight-bold mb-1">
+                                    Domain Layer
+                                </h5>
+                                <p class="text-muted mb-0">
+                                    Core entities, domain concepts,
+                                    business rules, and abstractions
+                                    independent of infrastructure.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-muted mb-3">
+                    <i class="fas fa-arrows-alt-v fa-lg"></i>
+                </div>
+
+                <!-- Infrastructure -->
+                <div class="card mb-3 border-info">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-2 text-center mb-3 mb-md-0">
+                                <i class="fas fa-server fa-2x text-info"></i>
+                            </div>
+
+                            <div class="col-md-10">
+                                <h5 class="font-weight-bold mb-1">
+                                    Infrastructure Layer
+                                </h5>
+                                <p class="text-muted mb-0">
+                                    Entity Framework Core, database
+                                    persistence, identity infrastructure,
+                                    repositories, and external services.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mt-4 mb-0">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    The dependency direction follows Clean Architecture:
+                    inner layers define core rules and abstractions,
+                    while outer layers implement infrastructure details.
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= ENGINEERING PRACTICES ================= -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="badge badge-primary mb-2">
+                Engineering Practices
+            </span>
+
+            <h2 class="font-weight-bold">
+                Beyond CRUD Operations
+            </h2>
+
+            <p class="text-muted">
+                Focus on the qualities that make backend systems
+                maintainable, secure, and easier to diagnose.
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-4">
+                <div class="media">
+                    <i class="fas fa-shield-alt fa-2x text-primary mr-3"></i>
+                    <div class="media-body">
+                        <h5 class="font-weight-bold">
+                            Security
+                        </h5>
+                        <p class="text-muted">
+                            Identity integration, JWT bearer authentication,
+                            authorization, secure configuration,
+                            and protected API operations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="media">
+                    <i class="fas fa-exclamation-circle fa-2x text-danger mr-3"></i>
+                    <div class="media-body">
+                        <h5 class="font-weight-bold">
+                            Error Handling & Validation
+                        </h5>
+                        <p class="text-muted">
+                            Centralized exception handling, validation,
+                            consistent response contracts, and
+                            appropriate HTTP status codes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="media">
+                    <i class="fas fa-vial fa-2x text-success mr-3"></i>
+                    <div class="media-body">
+                        <h5 class="font-weight-bold">
+                            Automated Testing
+                        </h5>
+                        <p class="text-muted">
+                            Unit and integration testing strategies
+                            for application behavior, API contracts,
+                            validation, and security scenarios.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="media">
+                    <i class="fas fa-chart-line fa-2x text-info mr-3"></i>
+                    <div class="media-body">
+                        <h5 class="font-weight-bold">
+                            Logging & Observability
+                        </h5>
+                        <p class="text-muted">
+                            Structured logging and telemetry practices
+                            that help developers investigate errors
+                            and understand application behavior.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="media">
+                    <i class="fas fa-tachometer-alt fa-2x text-warning mr-3"></i>
+                    <div class="media-body">
+                        <h5 class="font-weight-bold">
+                            Performance & Caching
+                        </h5>
+                        <p class="text-muted">
+                            Evaluate database access patterns and
+                            introduce caching when it provides
+                            measurable benefits.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="media">
+                    <i class="fas fa-code-branch fa-2x text-secondary mr-3"></i>
+                    <div class="media-body">
+                        <h5 class="font-weight-bold">
+                            Maintainability
+                        </h5>
+                        <p class="text-muted">
+                            Separation of concerns, dependency injection,
+                            explicit contracts, and reusable application
+                            components.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= TECHNOLOGY STACK ================= -->
+<section class="py-5 bg-light border-top border-bottom" id="technology">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="badge badge-primary mb-2">
+                Technology Stack
+            </span>
+
+            <h2 class="font-weight-bold">
+                Built with the .NET Ecosystem
+            </h2>
+
+            <p class="text-muted">
+                Technologies used by the project or considered
+                as part of its incremental development.
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-code fa-2x text-primary mb-3"></i>
+                        <h6 class="font-weight-bold">C# / .NET</h6>
+                        <p class="small text-muted mb-0">
+                            Backend Development
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-network-wired fa-2x text-success mb-3"></i>
+                        <h6 class="font-weight-bold">ASP.NET Core</h6>
+                        <p class="small text-muted mb-0">
+                            RESTful APIs
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-database fa-2x text-info mb-3"></i>
+                        <h6 class="font-weight-bold">Entity Framework Core</h6>
+                        <p class="small text-muted mb-0">
+                            Data Access
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-database fa-2x text-secondary mb-3"></i>
+                        <h6 class="font-weight-bold">SQL Server</h6>
+                        <p class="small text-muted mb-0">
+                            Relational Database
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-user-lock fa-2x text-danger mb-3"></i>
+                        <h6 class="font-weight-bold">Identity & JWT</h6>
+                        <p class="small text-muted mb-0">
+                            Authentication
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-file-alt fa-2x text-warning mb-3"></i>
+                        <h6 class="font-weight-bold">Serilog</h6>
+                        <p class="small text-muted mb-0">
+                            Structured Logging
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-chart-area fa-2x text-primary mb-3"></i>
+                        <h6 class="font-weight-bold">OpenTelemetry</h6>
+                        <p class="small text-muted mb-0">
+                            Observability
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-vial fa-2x text-success mb-3"></i>
+                        <h6 class="font-weight-bold">xUnit</h6>
+                        <p class="small text-muted mb-0">
+                            Automated Testing
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="alert alert-secondary mb-0">
+            <i class="fas fa-info-circle mr-2"></i>
+            Some technologies represent planned extensions rather than
+            completed features. Refer to the repository README for
+            implementation status.
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= PROJECT SCOPE ================= -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="font-weight-bold mb-0">
+                            <i class="fas fa-check-circle text-success mr-2"></i>
+                            Project Objectives
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+
+                            <li class="mb-3">
+                                <i class="fas fa-check text-success mr-2"></i>
+                                Apply Clean Architecture principles.
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="fas fa-check text-success mr-2"></i>
+                                Design consistent REST API contracts.
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="fas fa-check text-success mr-2"></i>
+                                Separate application and infrastructure concerns.
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="fas fa-check text-success mr-2"></i>
+                                Implement secure authentication and authorization.
+                            </li>
+
+                            <li class="mb-3">
+                                <i class="fas fa-check text-success mr-2"></i>
+                                Improve error handling and validation.
+                            </li>
+
+                            <li>
+                                <i class="fas fa-check text-success mr-2"></i>
+                                Explore testing, observability, and performance.
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="font-weight-bold mb-0">
+                            <i class="fas fa-info-circle text-primary mr-2"></i>
+                            Portfolio Scope
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="text-muted">
+                            This project is an independent backend engineering
+                            demonstration inspired by practical business
+                            application development.
+                        </p>
+
+                        <p class="text-muted">
+                            Its initial domain is intentionally limited
+                            to customers, products, and orders, allowing
+                            the implementation to focus on software
+                            architecture and engineering quality.
+                        </p>
+
+                        <p class="text-muted">
+                            It is not intended to reproduce the complete
+                            commercial inventory management product.
+                        </p>
+
+                        <a href="https://github.com/Hussien-A-Amin/InventoryManagement-CleanArchitecture"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="btn btn-outline-primary">
+                            Read Project Documentation
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= CALL TO ACTION ================= -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+
+        <i class="fab fa-github fa-3x mb-3"></i>
+
+        <h2 class="font-weight-bold">
+            Explore the Code. Understand the Architecture.
+        </h2>
+
+        <p class="lead">
+            Explore the implementation, review the project structure,
+            and follow the development of this .NET backend portfolio.
+        </p>
+
+        <a href="https://github.com/Hussien-A-Amin/InventoryManagement-CleanArchitecture"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn btn-light btn-lg">
+            <i class="fab fa-github mr-2"></i>
+            View GitHub Repository
+        </a>
+
+    </div>
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="py-4 bg-light border-top">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6 text-center text-md-left">
+                <h6 class="font-weight-bold mb-1">
+                    <i class="fas fa-boxes text-primary mr-2"></i>
+                    Inventory Management API
+                </h6>
+
+                <p class="text-muted small mb-0">
+                    A .NET Backend Engineering Showcase
+                </p>
+            </div>
+
+            <div class="col-md-6 text-center text-md-right mt-3 mt-md-0">
+
+                <a href="https://github.com/Hussien-A-Amin/InventoryManagement-CleanArchitecture"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="text-secondary mr-3">
+                    <i class="fab fa-github mr-1"></i>
+                    GitHub
                 </a>
 
-                <a routerLink="/admin" class="nav-item">
-                    <span class="nav-icon products">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="m12 3 9 5-9 5-9-5 9-5Z"/>
-                            <path d="M3 8v9l9 5 9-5V8"/>
-                            <path d="M12 13v9"/>
-                            <path d="m7.5 5.5 9 5"/>
-                        </svg>
-                    </span>
-                    <span>الادارة</span>
+                <a href="https://www.linkedin.com/in/hussien-ahmed-amin-a7b23731/"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="text-secondary">
+                    <i class="fab fa-linkedin mr-1"></i>
+                    LinkedIn
                 </a>
 
-               
-                <a routerLink="/portal" class="nav-item">
-                    <span class="nav-icon account">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <circle cx="12" cy="8" r="4"/>
-                            <path d="M4 21v-2a8 8 0 0 1 16 0v2H4Z"/>
-                        </svg>
-                    </span>
-                    <span>البورتال</span>
-                </a>
+                <p class="text-muted small mt-2 mb-0">
+                    &copy; 2026 Hussein Ahmed Amin.
+                </p>
 
-            </nav>
+            </div>
 
-            <footer class="page-footer">
-                © اسناوي — تسوّق من قلب مجتمعك
-            </footer>
+        </div>
+    </div>
+</footer>
 
-        </section>
-    </main>

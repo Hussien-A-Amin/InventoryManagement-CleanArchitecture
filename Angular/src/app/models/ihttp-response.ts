@@ -1,4 +1,5 @@
 export interface IhttpResponse<T> {
-    message:string,
-data:T
+    isSuccess: boolean,
+    message: string,
+    data: T
 }

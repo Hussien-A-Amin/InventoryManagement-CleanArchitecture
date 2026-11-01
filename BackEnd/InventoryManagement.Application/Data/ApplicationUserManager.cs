@@ -41,8 +41,8 @@ public class ApplicationUserManager(UserManager<ApplicationUser> _userManager, A
            var openCount=await dbSet.Where(p =>! p.IsCanceled&& p.UserId == CurrentUser.Id).CountAsync();
             if (openCount>5)
             {
-                Errors["OpenedSessionsExceeded"]= "Opened Sessions Exceeded";
-                return UserState.LoginFailed;
+                
+                return UserState.OpenedSessionsExceeded;
             }
 
 
