@@ -4,6 +4,7 @@ using InventoryManagement.Api.HealthChecks;
 using InventoryManagement.Infarstructure.EFCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +16,10 @@ builder.Services.AddOpenApi();
 
 
 
-
 builder
     .BuildBasic()
+    .BuildLoging()
+    .BuildOpemTelemetry()
     .BuildExceptionHandler()
     .BuildDbContext()
     .BuildIdentity()
@@ -26,30 +28,21 @@ builder
     .BuildMapster()
     .BuildUserManager()
     .BuildMailing()
+    .BuildHealthCheck()
+    .BuildCors()
 
     ;
 
 
 
-builder.Services.AddHealthChecks()
-    .AddCheck("Email", () => HealthCheckResult.Healthy())
-    .AddCheck("sms", () => HealthCheckResult.Healthy())
-    .AddCheck<PasswordCheck>("PasswordCheck")
-    .AddCheck<DataBaseCheck>("DataBaseCheck")
-    .AddCheck<MailServiceHealthCheck>("MailServiceCheck",tags:new[] { "mail" })
-    ;
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
+
+
 var app = builder.Build();
+//app.UseRequestResponseLogging();
+
 app.UseExceptionHandler();
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {

@@ -1,38 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace InventoryManagement.Api.Controllers;
 
-
-public class ConfigController : ControllerBase
+[ApiController]
+[Route("api/[controller]")]
+public class LoggerController(ILogger<LoggerController> logger) : ControllerBase
 {
-    private readonly IConfiguration _configuration;
-
-    public ConfigController(IConfiguration configuration)
+    [HttpPost("log-info-simple")]
+    public IActionResult LogInfo(string message)
     {
-        _configuration = configuration;
+        var start1=Stopwatch.StartNew();
+
+        
+            logger.LogInformation($"{message}");
+
+        
+        start1.Stop();
+        logger.LogCritical("elapsed time start1: {elapsed}", start1.ElapsedMilliseconds);
+
+
+        return Ok();
+    }
+    [HttpPost("log-info-template")]
+    public IActionResult Logtemplate(string message)
+    {
+        logger.LogInformation(message+"     {date:}",DateTime.Now);
+        return Ok();
     }
 
-    [HttpGet]
-    public IActionResult GetConfig()
-    {
-        // Read a standard configuration value (which may be overridden by an environment variable)
-        string customSetting = _configuration["MyCustomSetting"];
-        string connectionString = _configuration.GetConnectionString("DefaultConnection");
-        string testConnection = _configuration["testconn"];
-
-        // Read a connection string
-        //string connectionString = _configuration.GetConnectionString("DefaultConnection");
-
-        // Read directly from Environment variables if needed
-        string rawEnvVar = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-        return Ok(new
-        {
-            CustomSetting = customSetting,
-            //ConnectionString = connectionString,
-            Environment = rawEnvVar,
-            ConnectionString= connectionString,
-            TestConnection = testConnection
-        });
-    }
 }

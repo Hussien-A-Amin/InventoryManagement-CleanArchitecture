@@ -10,6 +10,20 @@ GET https://localhost:7034/health
 Accept: application/json
 
 ###
+Post {{BaseApi}}/logger/log-info-simple?message=first%20dhgf
+Accept: application/json
+###
+Post {{BaseApi}}/logger/log-info-template?message=first%20dhgf
+Accept: application/json
+
+
+
+
+
+
+
+
+###
 GET {{BaseApi}}/Products
 Accept: application/json
 Authorization: Bearer {{token}}

@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using InventoryManagement.Api.Authentication.Jwt;
 using InventoryManagement.Api.ErrorHandlers;
+using InventoryManagement.Api.HealthChecks;
 using InventoryManagement.Application.Data;
 using InventoryManagement.Application.Services.Mailing;
 using InventoryManagement.Infarstructure.EFCore;
@@ -12,8 +13,17 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using Serilog;
+using Serilog.Context;
 using System.Reflection;
 using System.Text;
 
@@ -25,6 +35,89 @@ public static class ProgramExtention
     {
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddHttpClient();
+
+        return builder;
+    }
+    public static WebApplicationBuilder BuildLoging(this WebApplicationBuilder builder)
+    {
+        //builder.Logging.ClearProviders();
+        //builder.Logging.AddConsole();
+
+        LogContext.PushProperty("tasnnemgggg", "From PushProperty");
+
+
+
+        Log.Logger = new LoggerConfiguration()
+            //.WriteTo.Console(new Serilog.Formatting.Compact.CompactJsonFormatter())
+            //.Enrich.FromLogContext()
+            .ReadFrom.Configuration(builder.Configuration)
+            //.Enrich.WithProperty("tasnnem", "From WithProperty")
+
+            
+            .CreateLogger();
+
+
+
+
+
+        builder.Services.AddSerilog();
+        //builder.Logging.AddDebug();
+
+        return builder;
+    }
+    public static WebApplicationBuilder BuildOpemTelemetry(this WebApplicationBuilder builder)
+    {
+
+        OpenTelemetryOptions otlOptions = builder.Configuration.GetSection("OpenTelemetry").Get<OpenTelemetryOptions>()!;
+        //OtlpExporterOptions otlp=new OtlpExporterOptions();
+        //otlp.Endpoint = new Uri(otlOptions.OTEL_EXPORTER_OTLP_ENDPOINT!);
+        //otlp.Headers = otlOptions.OTEL_EXPORTER_OTLP_HEADERS;
+        //otlp.Protocol = OtlpExportProtocol.HttpProtobuf; 
+
+        builder.Services.AddOpenTelemetry()
+            .ConfigureResource(resource =>
+            {
+                resource.AddService(otlOptions.OTEL_SERVICE_NAME);
+
+            })
+            .WithTracing(trace =>
+            {
+                trace.AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddEntityFrameworkCoreInstrumentation()
+                    .AddOtlpExporter(op =>
+                    {
+                        op.Endpoint = new Uri(otlOptions.OTEL_EXPORTER_OTLP_ENDPOINT!);
+                        op.Headers = otlOptions.OTEL_EXPORTER_OTLP_HEADERS;
+                        op.Protocol = OtlpExportProtocol.HttpProtobuf;
+                    })
+                    ;
+            })
+            .WithMetrics(metrics =>
+            {
+                metrics.AddAspNetCoreInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddOtlpExporter(op =>
+                    {
+                        op.Endpoint = new Uri(otlOptions.OTEL_EXPORTER_OTLP_ENDPOINT!);
+                        op.Headers = otlOptions.OTEL_EXPORTER_OTLP_HEADERS;
+                        op.Protocol = OtlpExportProtocol.HttpProtobuf;
+                    })
+
+                   ;
+            })
+            //.WithLogging()
+            //.UseOtlpExporter()
+            ;
+
+
+        builder.Logging.AddOpenTelemetry(op =>
+        {
+            op.AddOtlpExporter();
+        });
+
+
+
 
         return builder;
     }
@@ -84,7 +177,7 @@ public static class ProgramExtention
         var jwtSettings = builder.Configuration
             .GetSection("Jwt").Get<JwtOptions>();
 
-       
+
 
         var key = Encoding.UTF8.GetBytes(jwtSettings!.Key);
 
@@ -117,20 +210,20 @@ public static class ProgramExtention
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
                     };
-               
+
             });
 
         return builder;
     }
 
- 
+
 
 
 
 
     public static WebApplicationBuilder BuildFluentValidation(this WebApplicationBuilder builder)
     {
-       
+
         builder.Services.AddFluentValidationAutoValidation()
             .AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(Application.Filters.PublicFilterViewModel)));
 
@@ -150,7 +243,7 @@ public static class ProgramExtention
     {
         var MappingConfig = TypeAdapterConfig.GlobalSettings;
         MappingConfig.Scan(Assembly.GetAssembly(typeof(Application.Filters.PublicFilterViewModel))!);
-        
+
         builder.Services.AddSingleton<IMapper>(new Mapper(MappingConfig));
 
         builder.Services.AddMapster();
@@ -189,10 +282,45 @@ public static class ProgramExtention
 
 
 
+    public static WebApplicationBuilder BuildHealthCheck(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddHealthChecks()
+            .AddCheck("Email", () => HealthCheckResult.Healthy())
+            .AddCheck("sms", () => HealthCheckResult.Healthy())
+            .AddCheck<PasswordCheck>("PasswordCheck")
+            .AddCheck<DataBaseCheck>("DataBaseCheck")
+            .AddCheck<MailServiceHealthCheck>("MailServiceCheck", tags: new[] { "mail" })
+            ;
+        return builder;
+    }
+
+    public static WebApplicationBuilder BuildCors(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+        });
+        return builder;
+    }
     public static WebApplicationBuilder Build(this WebApplicationBuilder builder)
     {
 
         return builder;
     }
+
+}
+
+internal class OpenTelemetryOptions
+{
+    public string OTEL_SERVICE_NAME { get; set; }
+    public string OTEL_EXPORTER_OTLP_ENDPOINT { get; set; }
+    public string OTEL_EXPORTER_OTLP_PROTOCOL { get; set; }
+    public string OTEL_EXPORTER_OTLP_HEADERS { get; set; }
+
 
 }

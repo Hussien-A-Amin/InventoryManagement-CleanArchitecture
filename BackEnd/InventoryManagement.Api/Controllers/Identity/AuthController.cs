@@ -5,18 +5,21 @@ using InventoryManagement.Application.Dtos;
 using InventoryManagement.Infarstructure.EFCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog.Core;
 
 namespace InventoryManagement.Api.Controllers.Auth;
 
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(ApplicationDataUnit dataUnit, IAuthProvider _authProvider, ApplicationUserManager userManager) : ControllerBase
+public class AuthController(ILogger<AuthController> logger, ApplicationDataUnit dataUnit, IAuthProvider _authProvider, ApplicationUserManager userManager) : ControllerBase
 {
 
     [HttpPost("Login")]
     public async Task<IActionResult> Login(AuthRequest request, CancellationToken cancellationToken)
     {
+
+        logger.LogCritical("Login attempt for user: {@request}", request);
         var userState = await userManager.CheckUser(request, cancellationToken);
         if (userState != UserState.LoginSucceeded)
         {
